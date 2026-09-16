@@ -1,0 +1,14 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# подпись релиза — в репозиторий не попадает
+keystore.properties
+*.jks
+*.keystore

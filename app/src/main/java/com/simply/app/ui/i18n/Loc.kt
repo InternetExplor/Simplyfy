@@ -1,0 +1,573 @@
+package com.simply.app.ui.i18n
+
+import android.util.Log
+import com.simply.app.BuildConfig
+import java.util.Locale
+
+/**
+ * Перевод по русскому исходнику. Русский остаётся каноничным текстом в коде,
+ * английский подставляется по карте — так не нужно плодить ключи и легко видеть,
+ * что именно выводится на экран.
+ */
+fun tr(ru: String): String {
+    if (isRussian) return ru
+    val translated = EN[ru]
+    if (translated != null) return translated
+    // В отладочной сборке сразу видно, какой строке забыли пару в словаре.
+    if (BuildConfig.DEBUG) Log.w("SimplyLoc", "нет перевода: $ru")
+    return ru
+}
+
+/** Перевод со подстановкой: `trf("Осталось %s", value)`. */
+fun trf(ru: String, vararg args: Any?): String = String.format(tr(ru), *args)
+
+val isRussian: Boolean
+    get() = Locale.getDefault().language == "ru"
+
+private val EN: Map<String, String> = mapOf(
+    // --- общее ---
+    "Сегодня" to "Today",
+    "Завтра" to "Tomorrow",
+    "Вчера" to "Yesterday",
+    "Общий" to "Inbox",
+    "Все" to "All",
+    "Отмена" to "Cancel",
+    "Готово" to "Done",
+    "Удалить" to "Delete",
+    "Сохранить" to "Save",
+    "Создать" to "Create",
+    "Добавить" to "Add",
+    "Назад" to "Back",
+    "Понятно" to "Got it",
+    "Вернуть" to "Restore",
+    "Восстановить" to "Restore",
+    "Очистить" to "Clear",
+    "Убрать" to "Remove",
+    "Поставить" to "Add",
+    "Выполнено" to "Completed",
+    "Закончить раньше?" to "Finish early?",
+    "Записать это время в статистику или остановить сессию без записи?" to
+        "Log this time, or stop the session without recording it?",
+    "Записать время" to "Log the time",
+    "Без записи" to "Don't log",
+    "выполнено %1\$s" to "completed %1\$s",
+    "%1\$s, без срока: %2\$d" to "%1\$s, no date: %2\$d",
+    "Без срока" to "No date",
+    "Без задачи" to "No task",
+    "Без проекта" to "No project",
+    "Без раздела" to "No section",
+    "Просрочено" to "Overdue",
+    "мин" to "min",
+    "Название" to "Name",
+    "Значок" to "Icon",
+    "Цвет" to "Color",
+    "Цель" to "Goal",
+
+    // --- вкладки ---
+    "Задачи" to "Tasks",
+    "Привычки" to "Habits",
+    "Матрица" to "Matrix",
+    "Фокус" to "Focus",
+    "Календарь" to "Calendar",
+
+    // --- задачи ---
+    "Новая задача" to "New task",
+    "Детали задачи" to "Task details",
+    "Задача" to "Task",
+    "На сегодня всё чисто" to "Nothing due today",
+    "Здесь пусто" to "Nothing here",
+    "Просроченных задач нет — отлично." to "No overdue tasks — nice.",
+    "На сегодня ничего не запланировано." to "Nothing planned for today.",
+    "Нажми «+», чтобы добавить первую задачу." to "Tap + to add your first task.",
+    "Все проекты" to "All projects",
+    "Удалить задачу" to "Delete task",
+    "Что нужно сделать" to "What needs doing",
+    "Заметка (необязательно)" to "Note (optional)",
+    "Выполнить до" to "Due by",
+    ", до " to ", by ",
+    "без срока" to "no date",
+    "Дата…" to "Date…",
+    "Весь день" to "All day",
+    "весь день" to "all day",
+    "Время…" to "Time…",
+    "Раздел" to "Section",
+    "Сохранить как шаблон" to "Save as template",
+
+    // --- действия и отмена ---
+    "Отменить" to "Undo",
+    "Задача удалена" to "Task deleted",
+    "Удалено задач: %1\$d" to "Tasks deleted: %1\$d",
+    "Перенесено задач: %1\$d" to "Tasks moved: %1\$d",
+    "Привычка удалена" to "Habit deleted",
+    "Проект удалён" to "Project deleted",
+    "Шаблон удалён" to "Template deleted",
+    "Корзина очищена" to "Trash emptied",
+    "Просрочено: %1\$d" to "Overdue: %1\$d",
+    "На сегодня" to "To today",
+    "Поиск" to "Search",
+    "Поиск по задачам" to "Search tasks",
+    "Попробуй другое слово." to "Try another word.",
+    "Шаги" to "Steps",
+    "необязательно" to "optional",
+    "Добавить шаг" to "Add a step",
+
+    // --- корзина ---
+    "Корзина" to "Trash",
+    "Корзина пуста" to "Trash is empty",
+    "Удалённые задачи попадают сюда и ждут 30 дней."
+        to "Deleted tasks land here and wait 30 days.",
+    "Удалить навсегда" to "Delete forever",
+    "Удалена" to "Deleted",
+    "Удалена %1\$s" to "Deleted %1\$s",
+    "Удалённое хранится %1\$d дней" to "Deleted items are kept for %1\$d days",
+    "%1\$d в корзине" to "%1\$d in trash",
+
+    // --- привычки: напоминания и месяц ---
+    "Напоминание" to "Reminder",
+    "Нет" to "Off",
+    "Изменить привычку" to "Edit habit",
+    "Последние 4 недели" to "Last 4 weeks",
+    "в этом месяце" to "this month",
+    "лучшая серия" to "best streak",
+    "выполнение" to "completion",
+    "Отметь привычку: %1\$s" to "Time for: %1\$s",
+
+    // --- фокус вручную ---
+    "Записать вручную" to "Add manually",
+    "Время, которое таймер не застал" to "Time the timer missed",
+    "Сколько минут" to "How many minutes",
+    "Когда" to "When",
+
+    // --- календарь ---
+    "Месяц" to "Month",
+    "Неделя" to "Week",
+    "Повестка" to "Agenda",
+    "Ближайшие две недели свободны" to "The next two weeks are free",
+
+    // --- данные и оформление ---
+    "Автокопия раз в неделю" to "Weekly auto backup",
+    "Выбери папку для копий" to "Pick a folder for backups",
+    "Копия сохраняется при запуске приложения" to "Saved when the app starts",
+    "Папка для копий" to "Backup folder",
+    "Цвета системы" to "System colors",
+    "Палитра из обоев, как в Material You" to "Palette from your wallpaper, Material You",
+    "Отключи цвета системы, чтобы выбрать свой" to "Turn off system colors to pick your own",
+    "ещё %1\$d" to "%1\$d more",
+    "просрочено" to "overdue",
+    "Запись удалена" to "Entry deleted",
+    "История фокуса" to "Focus history",
+    "Что ищем?" to "What are we looking for?",
+    "Поиск идёт по задачам, их шагам, привычкам и проектам." to "Searches tasks, their steps, habits and projects.",
+    "Всего %1\$s" to "%1\$s in total",
+    "Добавить запись" to "Add an entry",
+    "Записей пока нет" to "No entries yet",
+    "Отрезки появятся здесь сами, а забытое можно добавить вручную." to "Sessions land here on their own; add forgotten ones by hand.",
+    "%1\$s · прервано" to "%1\$s · interrupted",
+    "Запись фокуса" to "Focus entry",
+    "Поправь минуты, день или задачу" to "Fix the minutes, day or task",
+    "Удалить запись" to "Delete entry",
+    "Привычек пока нет" to "No habits yet",
+    "Сегодня %1\$d мин" to "%1\$d min today",
+    "цель %1\$d в день" to "goal %1\$d a day",
+    "%1\$d мин" to "%1\$d min",
+    "Дата…" to "Date…",
+    "вт" to "tue",
+    "ср" to "wed",
+    "чт" to "thu",
+    "сб" to "sat",
+    "вс" to "sun",
+    "Закончить" to "Finish",
+    "В фокусе %1\$s" to "%1\$s in focus",
+    "Да" to "Yes",
+    "Продолжить?" to "Keep going?",
+    "Продолжить работу" to "Keep working",
+    "На перерыв" to "Take a break",
+    "На перерыв — задача закроется." to "Take a break — the task will be closed.",
+    "На перерыв — привычка получит отметку." to "Take a break — the habit gets a check.",
+    "Продолжить работу или на перерыв?" to "Keep working or take a break?",
+    "Все дни" to "All days",
+    "День свободен" to "The day is free",
+    "Свайп вбок листает дни, а новая задача встанет на этот день." to "Swipe sideways to change the day; a new task lands on it.",
+    "Всем задачам проставлен срок." to "Every task has a due date.",
+    "Показать шаги" to "Show steps",
+    "Свернуть шаги" to "Hide steps",
+    "Шаг: %1\$s" to "Step: %1\$s",
+    "Название раздела" to "Section name",
+    "Переименовать раздел" to "Rename section",
+    "%1\$s, открытых задач: %2\$d" to "%1\$s, open tasks: %2\$d",
+
+    // --- голосовой доступ ---
+    "Выполнено: %1\$s" to "Completed: %1\$s",
+    "Отметить выполненной: %1\$s" to "Mark completed: %1\$s",
+    "%1\$s, пропущен" to "%1\$s, skipped",
+    "%1\$s, %2\$d из %3\$d" to "%1\$s, %2\$d of %3\$d",
+    "%1\$s, выполнено" to "%1\$s, done",
+    "%1\$s, не отмечено" to "%1\$s, not checked",
+    "%1\$s, задач: %2\$d" to "%1\$s, tasks: %2\$d",
+    "Свернуть" to "Collapse",
+
+    // --- матрица ---
+    "Входящие" to "Unsorted",
+    "Разложи по квадрантам" to "Sort into quadrants",
+    "Всё разобрано" to "All sorted",
+    "Новые задачи ждут здесь, пока не разложишь их по квадрантам."
+        to "New tasks wait here until you sort them into quadrants.",
+    "Разложи задачи по важности и срочности" to "Sort tasks by importance and urgency",
+    "Квадрант пуст" to "Quadrant is empty",
+    "Срочно" to "Urgent",
+    "Не срочно" to "Not urgent",
+    "Важно" to "Important",
+    "Срочно и важно" to "Urgent and important",
+    "Сделать сейчас" to "Do now",
+    "Запланировать" to "Plan it",
+    "Быстро закрыть" to "Close quickly",
+    "Когда-нибудь" to "Someday",
+    "Сюда попадают задачи «важно + срочно». Хорошо, что их нет."
+        to "This is where urgent and important tasks land. Good that it's empty.",
+    "Самый полезный квадрант: важное без пожара. Запланируй что-нибудь."
+        to "The most useful quadrant: important without the fire. Plan something.",
+    "Срочное, но не важное — делегируй или закрой за пару минут."
+        to "Urgent but not important — delegate it or close it in a couple of minutes.",
+    "Ни важное, ни срочное. Такое можно и не делать."
+        to "Neither important nor urgent. This can simply go undone.",
+
+    // --- привычки ---
+    "Цель на день" to "Daily goal",
+    "Своё…" to "Custom…",
+    "Сколько раз в день" to "Times a day",
+    "Больше значков" to "More icons",
+    "Свернуть" to "Collapse",
+    "Просто отметка" to "Simple check",
+    "%1\$d раз" to "%1\$d times",
+    "%1\$d из %2\$d сегодня" to "%1\$d of %2\$d today",
+    "Добавь первую привычку" to "Add your first habit",
+    "Предыдущая неделя" to "Previous week",
+    "Следующая неделя" to "Next week",
+    "Пока нет привычек" to "No habits yet",
+    "Начни с одной-двух: вода, чтение, зарядка. Отмечай кружок каждый день."
+        to "Start with one or two: water, reading, exercise. Tick the circle every day.",
+    "Отмечено за неделю" to "Checked this week",
+    "Новая привычка" to "New habit",
+    "Удалить привычку" to "Delete habit",
+    "Привычка" to "Habit",
+
+    // --- календарь ---
+    "Точки — задачи, полоска — привычки" to "Dots are tasks, the bar is habits",
+    "Предыдущий месяц" to "Previous month",
+    "Следующий месяц" to "Next month",
+    "На этот день ничего нет" to "Nothing on this day",
+    "Свободно. Можно добавить задачу — или оставить как есть."
+        to "Free. Add a task — or leave it as it is.",
+    "пн" to "mon", "вт" to "tue", "ср" to "wed", "чт" to "thu",
+    "пт" to "fri", "сб" to "sat", "вс" to "sun",
+
+    // --- фокус ---
+    "Статистика" to "Statistics",
+    "Настройки таймера" to "Timer settings",
+    "Сбросить" to "Reset",
+    "Старт" to "Start",
+    "Пауза" to "Pause",
+    "Продолжить" to "Resume",
+    "Стоп" to "Stop",
+    "Пропустить" to "Skip",
+    "за 7 дней" to "last 7 days",
+    "Открыть статистику" to "Open statistics",
+    "Над чем работаем" to "What are we working on",
+    "Выбрать…" to "Choose…",
+    "Поиск задачи или привычки" to "Search a task or habit",
+    "Просто отсчёт времени" to "Just a countdown",
+    "Ничего не нашлось" to "Nothing found",
+    "Перерыв" to "Break",
+    "Длинный перерыв" to "Long break",
+
+    // --- статистика ---
+    "Сколько времени уходит на что" to "Where the time goes",
+    "Пока нечего считать" to "Nothing to count yet",
+    "Время в фокусе" to "Focus time",
+    "сегодня" to "today",
+    "всего" to "total",
+    "Последние 14 дней" to "Last 14 days",
+    "по времени" to "by time",
+    "Показатели" to "Metrics",
+    "Всего сессий" to "Sessions total",
+    "Доведено до конца" to "Finished fully",
+    "Прервано вручную" to "Stopped manually",
+    "Средняя сессия" to "Average session",
+    "Самая длинная сессия" to "Longest session",
+    "Дней с фокусом" to "Days with focus",
+    "Серия сейчас" to "Current streak",
+    "Лучшая серия" to "Best streak",
+    "Самый рабочий день" to "Most productive weekday",
+    "Рекорд за день" to "Best day",
+    "активных" to "active",
+    "выполнено" to "completed",
+    "в фокусе" to "in focus",
+
+    // --- проекты ---
+    "Проекты" to "Projects",
+    "Проект" to "Project",
+    "Новый проект" to "New project",
+    "У каждого свои разделы, задачи и прогресс"
+        to "Each has its own sections, tasks and progress",
+    "Нет проектов" to "No projects",
+    "Проект собирает задачи одной темы и делится на разделы."
+        to "A project collects tasks of one theme and splits into sections.",
+    "В архиве" to "Archived",
+    "Изменить проект" to "Edit project",
+    "Здесь пока пусто" to "Nothing here yet",
+    "Добавь задачу внизу — она попадёт в этот проект."
+        to "Add a task below — it lands in this project.",
+    "Новый раздел" to "New section",
+    "Удалить раздел" to "Delete section",
+    "Удалить проект" to "Delete project",
+    "Удалить проект?" to "Delete project?",
+    "Задачи проекта переедут в «Общий», разделы будут удалены."
+        to "Its tasks move to Inbox, sections are removed.",
+    "Описание (необязательно)" to "Description (optional)",
+    "Вернуть из архива" to "Restore from archive",
+    "В архив" to "Archive",
+
+    // --- шаблоны ---
+    "Шаблоны" to "Templates",
+    "Шаблон" to "Template",
+    "Новый шаблон" to "New template",
+    "Заготовки задач: ставь когда нужно или включи повтор"
+        to "Task blueprints: add them when needed or turn on repeat",
+    "Шаблонов пока нет" to "No templates yet",
+    "Повторяются сами" to "Repeat automatically",
+    "Ставятся вручную" to "Added manually",
+    "Ставится вручную" to "Added manually",
+    "Поставить на сегодня" to "Add for today",
+    "Название задачи" to "Task name",
+    "Поставить задачу" to "Add a task",
+    "Повтор" to "Repeat",
+    "Создать шаблон" to "Create template",
+    "Удалить шаблон" to "Delete template",
+    "Без повтора" to "No repeat",
+    "Каждый день" to "Every day",
+    "По будням" to "Weekdays",
+    "По дням недели" to "Days of week",
+    "Каждые N дней" to "Every N days",
+    "Раз в месяц" to "Monthly",
+    "В последний день месяца" to "On the last day of the month",
+    "Повторяющиеся задачи" to "Repeating tasks",
+    "Повторяющаяся задача" to "Repeating task",
+    "Новый повтор" to "New repeat",
+    "Тонкая настройка расписания" to "Fine-tune the schedule",
+    "Повтор включён" to "Repeat is on",
+    "Выключенный повтор задач не ставит" to "A disabled repeat adds no tasks",
+    "Период" to "Period",
+    "Начало" to "Starts",
+    "Окончание" to "Ends",
+    "Бессрочно" to "No end",
+    "Выбрать дату" to "Pick a date",
+    "Ставить заранее" to "Create ahead",
+    "Только в день" to "On the day",
+    "Не дублировать" to "Avoid duplicates",
+    "Не ставить новую, пока предыдущая не выполнена"
+        to "Do not add a new one while the previous is unfinished",
+    "Ближайшие постановки" to "Next occurrences",
+    "Повтор не настроен" to "Repeat is not configured",
+    "Поставить сейчас" to "Add now",
+    "Удалить повтор" to "Delete repeat",
+    "Настроить" to "Configure",
+    "Нет повторяющихся задач" to "No repeating tasks",
+    "Добавь то, что делаешь регулярно: отчёт, тренировка, оплата счетов."
+        to "Add what you do regularly: a report, a workout, paying bills.",
+    "Расписание" to "Schedule",
+    "Поведение" to "Behaviour",
+    "до" to "by",
+    "Число месяца" to "Day of month",
+    "Интервал" to "Interval",
+    "Дни недели" to "Days of week",
+
+    // --- настройки ---
+    "Настройки" to "Settings",
+    "Оформление" to "Appearance",
+    "Тема" to "Theme",
+    "Акцент" to "Accent",
+    "Как в системе" to "System default",
+    "Светлая" to "Light",
+    "Тёмная" to "Dark",
+    "Показывать выполненные" to "Show completed",
+    "Блок «Выполнено» под списком" to "A Completed block under the list",
+    "Просроченные в «Сегодня»" to "Overdue in Today",
+    "Не теряются, если срок уже прошёл" to "They stay visible after the due date",
+    "Уведомления" to "Notifications",
+    "Таймер в шторке" to "Timer in the shade",
+    "Отсчёт продолжается, когда приложение свёрнуто"
+        to "The countdown keeps running when the app is in the background",
+    "Напоминания о дедлайнах" to "Deadline reminders",
+    "Для задач со временем «выполнить до»" to "For tasks with a due time",
+    "Когда напоминать" to "When to remind",
+    "Системные настройки уведомлений" to "System notification settings",
+    "Звук, важность, показ на экране блокировки"
+        to "Sound, importance, lock screen visibility",
+    "Помодоро" to "Pomodoro",
+    "Короткий перерыв" to "Short break",
+    "Сессий до длинного" to "Sessions before long break",
+    "Вибрация в конце" to "Vibrate at the end",
+    "Не гасить экран" to "Keep the screen on",
+    "Пока идёт таймер" to "While the timer runs",
+    "Данные" to "Data",
+    "Сохранить резервную копию" to "Save a backup",
+    "Все задачи, привычки, шаблоны и статистика в один файл"
+        to "All tasks, habits, templates and statistics in one file",
+    "Восстановить из копии" to "Restore from a backup",
+    "Восстановить из копии?" to "Restore from a backup?",
+    "Текущие данные будут заменены" to "Current data will be replaced",
+    "Удалить выполненные задачи" to "Delete completed tasks",
+    "Сбросить всё" to "Reset everything",
+    "Сбросить все данные?" to "Reset all data?",
+    "Задачи, проекты, привычки и статистика" to "Tasks, projects, habits and statistics",
+    "Задачи, проекты, привычки и статистика помодоро будут удалены. Отменить это нельзя."
+        to "Tasks, projects, habits and pomodoro statistics will be deleted. This cannot be undone.",
+    "Все текущие задачи, привычки, шаблоны и статистика будут заменены содержимым файла."
+        to "All current tasks, habits, templates and statistics will be replaced by the file contents.",
+    "О приложении" to "About",
+    "Версия 1.0 · всё хранится только на устройстве"
+        to "Version 1.0 · everything stays on this device",
+    "Копия сохранена" to "Backup saved",
+    "Не удалось сохранить файл" to "Could not save the file",
+    "Не удалось прочитать файл" to "Could not read the file",
+    "Данные восстановлены" to "Data restored",
+    "Файл не похож на копию Simply" to "This file is not a Simply backup",
+    "Без разрешения на уведомления Simply не сможет их показывать"
+        to "Without notification permission Simply cannot show them",
+    "В момент" to "On time",
+    "За 15 минут" to "15 minutes before",
+    "За час" to "An hour before",
+    "За 3 часа" to "3 hours before",
+
+    // --- уведомления ---
+    "Таймер помодоро" to "Pomodoro timer",
+    "Отсчёт текущего отрезка" to "Countdown of the current interval",
+    "Конец отрезка" to "Interval finished",
+    "Сообщение о завершении работы или перерыва"
+        to "A message when work or a break ends",
+    "Напоминания о задачах" to "Task reminders",
+    "Задачи со временем «выполнить до»" to "Tasks with a due time",
+    "Отрезок завершён" to "Interval finished",
+    "Перерыв закончился" to "Break is over",
+    "Можно снова браться за дело" to "Time to get back to it",
+
+    // --- демо-контент ---
+    "Личное" to "Personal",
+    "Работа" to "Work",
+    "Разобрать входящие" to "Clear the inbox",
+    "Прогулка 30 минут" to "30 minute walk",
+    "Спланировать неделю" to "Plan the week",
+    "Оплатить счета" to "Pay the bills",
+    "Записаться к врачу" to "Book a doctor",
+    "Вода" to "Water",
+    "Чтение" to "Reading",
+    "Зарядка" to "Exercise",
+
+    // --- акценты ---
+    "Индиго" to "Indigo",
+    "Океан" to "Ocean",
+    "Мята" to "Mint",
+    "Закат" to "Sunset",
+    "Слива" to "Plum",
+    "Роза" to "Rose",
+
+    // --- форматы ---
+    "%1\$s мин" to "%1\$s min",
+    "%1\$s ч" to "%1\$sh",
+    "%1\$s ч %2\$s мин" to "%1\$sh %2\$sm",
+    "Помодоро: %1\$d мин работы, %2\$d мин отдыха"
+        to "Pomodoro: %1\$d min of work, %2\$d min of rest",
+    "На сегодня %1\$s" to "%1\$s due today",
+    "Сегодня %1\$d из %2\$d" to "%1\$d of %2\$d today",
+    "%1\$d / %2\$d за неделю" to "%1\$d / %2\$d this week",
+    "Привычек отмечено: %1\$d из %2\$d" to "Habits checked: %1\$d of %2\$d",
+    "Цель: %1\$d раз в неделю" to "Goal: %1\$d times a week",
+    "сегодня · %1\$s" to "today · %1\$s",
+    "Задача в «%1\$s»" to "Task in %1\$s",
+    "Новая задача · %1\$s" to "New task · %1\$s",
+    "Задача на %1\$s" to "Task for %1\$s",
+    "Из шаблона «%1\$s»" to "From template %1\$s",
+    "Поставлено %1\$d, выполнено %2\$d" to "Added %1\$d, completed %2\$d",
+    "%1\$d в списке" to "%1\$d in the list",
+    "%1\$d из %2\$d" to "%1\$d of %2\$d",
+    "%1\$d подряд" to "%1\$d in a row",
+    "в среднем %1\$s" to "avg %1\$s",
+    "%1\$s · в среднем %2\$s" to "%1\$s · avg %2\$s",
+    "максимум %1\$s в день" to "peak %1\$s a day",
+    "Дальше: %1\$s" to "Next: %1\$s",
+    "Активных %1\$d" to "Active %1\$d",
+    " · выполнено %1\$d" to " · completed %1\$d",
+    " · разделов %1\$d" to " · sections %1\$d",
+    " · до %1\$s" to " · by %1\$s",
+    " · поставлено %1\$d" to " · added %1\$d",
+    "%1\$s, до %2\$s" to "%1\$s, by %2\$s",
+    "до %1\$s" to "by %1\$s",
+    "Каждые %1\$s" to "Every %1\$s",
+    "%1\$d числа" to "day %1\$d",
+    "%1\$d в неделю" to "%1\$d a week",
+    "за %1\$s" to "%1\$s ahead",
+    "с %1\$s" to "from %1\$s",
+    "по %1\$s" to "until %1\$s",
+    "Запусти таймер на вкладке «Фокус» — здесь появится разбор по задачам, проектам и дням."
+        to "Start the timer on the Focus tab — the breakdown by task, project and day appears here.",
+    "Создай заготовку для того, что повторяется: уборка, отчёт, тренировка. Ставить её потом — одно касание."
+        to "Create a blueprint for what repeats: cleaning, a report, a workout. Adding it later takes one tap.",
+
+    // --- вводный гид ---
+    "Дальше" to "Next",
+    "Как пользоваться" to "How to use it",
+    "Короткий тур по разделам приложения" to "A short tour of the app",
+    "Добро пожаловать" to "Welcome",
+    "Simply — задачи, привычки, помодоро и календарь. Всё хранится на телефоне: ни аккаунтов, ни сети. Покажу основное за минуту."
+        to "Simply is tasks, habits, a pomodoro timer and a calendar. Everything stays on your phone — no accounts, no network. Here are the basics in a minute.",
+    "Главный экран — один день. Неделя сверху, свайп вбок листает даты. Просроченное поднимается в сегодня, задачи без срока лежат в подвале дня."
+        to "The main screen is a single day. The week sits on top, a sideways swipe changes the date. Overdue tasks move up into today, undated ones wait at the bottom of the day.",
+    "Быстрый ввод" to "Quick add",
+    "Наберите название — задача уже в списке. Срок можно писать прямо в тексте: «завтра в 18:00». Кнопка справа откроет полный редактор."
+        to "Type a name and the task is in the list. A due date can go straight into the text: “tomorrow at 6pm”. The button on the right opens the full editor.",
+    "Кнопки в заголовке" to "Buttons in the header",
+    "Поиск, шаблоны с повторами, проекты и настройки. У каждой задачи всегда есть проект — если не выбрать, будет «Общий»."
+        to "Search, templates with repeats, projects and settings. Every task always belongs to a project — “Inbox” unless you pick another.",
+    "Недельная сетка с сериями. Касание кружка — плюс один за день, касание по полному — сброс, долгое нажатие — минус один."
+        to "A weekly grid with streaks. Tap a circle for one more today, tap a full one to reset, long-press to take one back.",
+    "Важно и срочно — четыре квадранта. Новые задачи ждут во «Входящих» матрицы, пока вы не разложите их."
+        to "Important and urgent — four quadrants. New tasks wait in the matrix inbox until you sort them.",
+    "Помодоро: выберите цель из задач и привычек и запустите отрезок. В конце спросим, продолжать или уйти на перерыв. Кнопка графика — статистика."
+        to "Pomodoro: pick a goal from your tasks and habits and start an interval. At the end we ask whether to keep going or take a break. The chart button opens the stats.",
+    "Месяц целиком: точки задач, полоска привычек и список дел на выбранный день."
+        to "The whole month: task dots, a habit strip and the to-do list for the selected day.",
+    // Проекты: завершение вместо архива
+    "Завершённые" to "Finished",
+    "Завершить проект" to "Finish project",
+    "Вернуть в работу" to "Reopen",
+    "Проект завершён" to "Project finished",
+    "Его задачи не показываются в дне, матрице и календаре."
+        to "Its tasks are hidden from the day, the matrix and the calendar.",
+    "завершён %1\$s" to "finished %1\$s",
+    // Выбор проекта поиском
+    "Поиск проекта" to "Search projects",
+    "Ничего не найдено" to "Nothing found",
+    // Привычки: проект и группы
+    "Группа" to "Group",
+    "Без группы" to "No group",
+    "＋ Группа" to "＋ Group",
+    "Новая группа" to "New group",
+    "Изменить группу" to "Edit group",
+    "Группа удалена" to "Group deleted",
+    "Развернуть" to "Expand",
+    "Добавить привычку" to "Add habit",
+    "Добавить привычку проекта" to "Add a habit to this project",
+    "серия %1\$s" to "streak %1\$s",
+    "цель %1\$d в неделю" to "goal %1\$d per week",
+    "%1\$d из %2\$d" to "%1\$d of %2\$d",
+    // Колесо счёта у привычки
+    "Закрыть" to "Close",
+    "Пропустить день" to "Skip day",
+    "Вернуть день" to "Unskip day",
+    "цель %1\$d" to "goal %1\$d",
+    "Меньше" to "Less",
+    "Больше" to "More",
+    "Это всё" to "That is all",
+    "Тема, длительности помодоро, напоминания и копия данных — в настройках. Там же кнопка «Как пользоваться», если захотите пройти гид ещё раз."
+        to "Theme, pomodoro lengths, reminders and a backup copy live in settings. “How to use it” is there too, if you want this tour again."
+)

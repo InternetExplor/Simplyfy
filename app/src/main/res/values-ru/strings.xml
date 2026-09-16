@@ -1,0 +1,10 @@
+<resources>
+    <string name="shortcut_new_task">Новая задача</string>
+    <string name="shortcut_focus">Фокус</string>
+    <string name="widget_today">Сегодня</string>
+    <string name="widget_name">Simply — сегодня</string>
+    <string name="widget_tab_tasks">Задачи</string>
+    <string name="widget_tab_habits">Привычки</string>
+    <string name="widget_tab_focus">Фокус</string>
+    <string name="widget_row_toggle">Отметить</string>
+</resources>

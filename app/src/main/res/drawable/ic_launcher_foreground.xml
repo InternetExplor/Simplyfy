@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- shadow under the check -->
+    <path
+        android:pathData="M37,56 L48,67 L72,41"
+        android:strokeColor="#33000000"
+        android:strokeWidth="9"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:translateY="2" />
+    <!-- main check -->
+    <path
+        android:pathData="M37,56 L48,67 L72,41"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="9"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <!-- accent dot -->
+    <path
+        android:pathData="M33,40m-4.5,0a4.5,4.5 0,1 1,9 0a4.5,4.5 0,1 1,-9 0"
+        android:fillColor="#FFFFFFFF"
+        android:fillAlpha="0.55" />
+</vector>

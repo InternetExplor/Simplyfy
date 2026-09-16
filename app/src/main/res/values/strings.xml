@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">Simply</string>
+    <string name="shortcut_new_task">New task</string>
+    <string name="shortcut_focus">Focus</string>
+    <string name="widget_today">Today</string>
+    <string name="widget_name">Simply — today</string>
+    <string name="widget_add" translatable="false">+</string>
+    <string name="widget_tab_tasks">Tasks</string>
+    <string name="widget_tab_habits">Habits</string>
+    <string name="widget_tab_focus">Focus</string>
+    <string name="widget_row_toggle">Mark</string>
+</resources>

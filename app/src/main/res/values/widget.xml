@@ -1,0 +1,36 @@
+<resources>
+    <color name="widget_bg">#FFFFFFFF</color>
+    <color name="widget_text">#FF1C1C1E</color>
+    <color name="widget_muted">#FF83838C</color>
+    <color name="widget_accent">#FF5B5BD6</color>
+    <!-- Заливка плашек: тот же акцент, разбавленный до 14%. -->
+    <color name="widget_accent_soft">#245B5BD6</color>
+    <color name="widget_divider">#1A1C1C1E</color>
+    <color name="widget_error">#FFD6336C</color>
+    <style name="WidgetTab">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/widget_tab_off</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/widget_muted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+    <style name="WidgetLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">9dp</item>
+        <item name="android:textColor">@color/widget_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:drawableStart">@drawable/widget_dot</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:visibility">gone</item>
+    </style>
+</resources>
