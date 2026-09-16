@@ -1,7 +1,31 @@
 # Simply
 
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-BOM-4285F4?logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
+[![Material 3](https://img.shields.io/badge/Material%203-Design-757575?logo=materialdesign&logoColor=white)](https://m3.material.io)
+[![Android](https://img.shields.io/badge/Android-minSdk%2026%20%C2%B7%20targetSdk%2036-3DDC84?logo=android&logoColor=white)](https://developer.android.com)
+[![AGP](https://img.shields.io/badge/AGP-8.13-3DDC84?logo=androidstudio&logoColor=white)](https://developer.android.com/build)
+[![Gradle](https://img.shields.io/badge/Gradle-8.14.3-02303A?logo=gradle&logoColor=white)](https://gradle.org)
+[![kotlinx.serialization](https://img.shields.io/badge/kotlinx.serialization-JSON-7F52FF?logo=kotlin&logoColor=white)](https://github.com/Kotlin/kotlinx.serialization)
+[![Offline](https://img.shields.io/badge/Offline-first-lightgrey)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Простой личный трекер для Android: задачи, проекты, привычки, матрица Эйзенхауэра,
 помодоро и календарь. Всё хранится локально, без аккаунтов и сети.
+
+## Скриншоты
+
+| Задачи | Привычки | Матрица |
+|---|---|---|
+| <img src="screenshots/tasks.jpg" width="240"> | <img src="screenshots/habits.jpg" width="240"> | <img src="screenshots/matrix.jpg" width="240"> |
+
+| Фокус | Календарь | Настройки |
+|---|---|---|
+| <img src="screenshots/pomodoro.jpg" width="240"> | <img src="screenshots/calendar.jpg" width="240"> | <img src="screenshots/settings.jpg" width="240"> |
+
+| Вводный гид |
+|---|
+| <img src="screenshots/learning.jpg" width="240"> |
 
 ## Экраны
 
@@ -66,9 +90,10 @@
 `local.properties` содержит путь к Android SDK. Release подписан debug-ключом —
 для личной установки этого достаточно, для публикации в Play нужен свой keystore.
 
-## Автор
+## Авторы
 
-eightsimvols@gmail.com
+- eightsimvols@gmail.com — автор
+- 007daymos007@gmail.com — разработчик
 
 ## Лицензия
 
